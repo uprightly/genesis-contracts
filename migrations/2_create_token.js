@@ -1,5 +1,5 @@
-var ProtocolToken = artifacts.require("./ProtocolToken.sol");
+var UprightlyProtocolToken = artifacts.require("./UprightlyProtocolToken.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(ProtocolToken);
+  deployer.deploy(UprightlyProtocolToken);
 };
