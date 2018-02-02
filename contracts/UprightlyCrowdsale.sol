@@ -1,6 +1,7 @@
 pragma solidity ^0.4.18;
 
 import "../node_modules/zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol";
+import "../node_modules/zeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 import "./UprightlyProtocolToken.sol";
 
 /**
@@ -10,6 +11,14 @@ import "./UprightlyProtocolToken.sol";
  *
  */
 contract UprightlyCrowdsale is FinalizableCrowdsale {
+
+  function UprightlyCrowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet) public
+    FinalizableCrowdsale()
+    Crowdsale(_startTime, _endTime, _rate, _wallet)
+  {
+
+  }
+
   function createTokenContract() internal returns (MintableToken) {
     return new UprightlyProtocolToken();
   }
@@ -19,7 +28,6 @@ contract UprightlyCrowdsale is FinalizableCrowdsale {
    *
    * Here we mint tokens for the Team to meet the allocated
    * percentages as described in the whitepaper.
-   *
    *
    */
   function finalization() internal {
@@ -37,6 +45,5 @@ contract UprightlyCrowdsale is FinalizableCrowdsale {
 
     // crowdsale is over at this point. No more tokens will be created.
     token.finishMinting();
-
   }
 }
