@@ -29,8 +29,14 @@ contract('UprightlyCrowdsale', function ([owner, wallet, investor]) {
     this.startTime = latestTime() + duration.weeks(1);
     this.endTime = this.startTime + duration.weeks(1);
     this.afterEndTime = this.endTime + duration.seconds(1);
-    this.crowdsale = await UprightlyCrowdsale.new(this.startTime, this.endTime, tokenMintRate, wallet);
-    this.token = UprightlyProtocolToken.at(await this.crowdsale.token());
+
+    this.token = await UprightlyProtocolToken.new();
+
+    this.crowdsale = await UprightlyCrowdsale.new(
+      this.startTime, this.endTime, tokenMintRate, wallet, this.token.address
+    );
+    await this.token.transferOwnership(this.crowdsale.address);
+
   });
 
   it("should mint the proper rate", async function () {

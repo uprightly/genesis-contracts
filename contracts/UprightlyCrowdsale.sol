@@ -2,7 +2,6 @@ pragma solidity ^0.4.18;
 
 import "../node_modules/zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol";
 import "../node_modules/zeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
-import "./UprightlyProtocolToken.sol";
 
 /**
  * @title SampleCrowdsale
@@ -12,15 +11,11 @@ import "./UprightlyProtocolToken.sol";
  */
 contract UprightlyCrowdsale is FinalizableCrowdsale {
 
-  function UprightlyCrowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet) public
+  function UprightlyCrowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet, MintableToken _token) public
     FinalizableCrowdsale()
-    Crowdsale(_startTime, _endTime, _rate, _wallet)
+    Crowdsale(_startTime, _endTime, _rate, _wallet, _token)
   {
 
-  }
-
-  function createTokenContract() internal returns (MintableToken) {
-    return new UprightlyProtocolToken();
   }
 
   /**
