@@ -18,8 +18,8 @@ function timestamp() {
 
 module.exports = function (deployer, network, accounts) {
 
-  const startTime = timestamp() + days(12);
-  const endTime = startTime + days(30);
+  const startTime = timestamp() + days(10);
+  const endTime = startTime + days(20);
   const rate = 1000;
   const wallet = accounts[0];
 
